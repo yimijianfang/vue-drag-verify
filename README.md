@@ -26,5 +26,5 @@
    </drag-verify>
    ```
 
-(DEMO)[DEMO]
+[DEMO](https://yimijianfang.github.io/vue-drag-verify/#/)
 
