@@ -121,6 +121,18 @@ export default {
       type: String,
       default: "验证失败"
     },
+    diffDegree: {
+      type: Number,
+      default: 10
+    },
+    minDegree:{
+      type: Number,
+      default: 90
+    },
+    maxDegree:{
+      type: Number,
+      default: 270
+    }
   },
   mounted: function() {
     const dragEl = this.$refs.dragVerify;
@@ -176,6 +188,13 @@ export default {
         width: this.width + "px",
         fontSize: this.textSize
       };
+    },
+    factor: function(){
+      //避免指定旋转角度时一直拖动到最右侧才验证通过
+      if(this.minDegree==this.maxDegree){
+        return Math.floor(1+Math.random()*6)/10+1
+      }
+      return 1;
     }
   },
   data() {
@@ -192,8 +211,10 @@ export default {
   },
   methods: {
     checkimgLoaded: function(){
-      //生成图片缺失位置
-      var ranRotate = Math.floor(45 + Math.random()*(180-45)); //生成45-180随机角度
+      //生成旋转角度
+      var minDegree = this.minDegree;
+      var maxDegree = this.maxDegree;
+      var ranRotate = Math.floor(minDegree + Math.random()*(maxDegree-minDegree)); //生成随机角度
       this.ranRotate = ranRotate;
       console.log('旋转'+ranRotate)
       this.imgStyle = {
@@ -215,10 +236,12 @@ export default {
     dragMoving: function(e) {
       if (this.isMoving && !this.isPassing) {
         var _x = (e.pageX || e.touches[0].pageX) - this.x;
+        console.log(_x,'_x')
         var handler = this.$refs.handler;
         handler.style.left = _x + "px";
         this.$refs.progressBar.style.width = _x + this.height / 2 + "px";
-        var cRotate = Math.ceil(_x/this.width*170)
+        var cRotate = Math.ceil(_x/(this.width - this.height)*this.maxDegree*this.factor)
+        console.log(cRotate,'cRotate')
         this.cRotate = cRotate;
         var rotate = this.ranRotate - cRotate
         this.imgStyle = {
@@ -228,7 +251,7 @@ export default {
     },
     dragFinish: function(e) {
       if (this.isMoving && !this.isPassing) {
-        if (Math.abs(this.ranRotate - this.cRotate)>20) {
+        if (Math.abs(this.ranRotate - this.cRotate)>this.diffDegree) {
           this.isOk = true;
           this.imgStyle = {
             transform: `rotateZ(${this.ranRotate}deg)`
@@ -361,22 +384,6 @@ export default {
   width: 0px !important;
   transition: width 0.5s;
 }
-@-webkit-keyframes slidetounlock {
-  0% {
-    background-position: var(--pwidth) 0;
-  }
-  100% {
-    background-position: var(--width) 0;
-  }
-}
-@-webkit-keyframes slidetounlock2 {
-  0% {
-    background-position: var(--pwidth) 0;
-  }
-  100% {
-    background-position: var(--pwidth) 0;
-  }
-}
 .drag-verify-container{
   position: relative;
   line-height: 0;
@@ -418,5 +425,23 @@ export default {
 }
 .check-img{
   width: 100%;
+}
+</style>
+<style>
+@-webkit-keyframes slidetounlock {
+  0% {
+    background-position: var(--pwidth) 0;
+  }
+  100% {
+    background-position: var(--width) 0;
+  }
+}
+@-webkit-keyframes slidetounlock2 {
+  0% {
+    background-position: var(--pwidth) 0;
+  }
+  100% {
+    background-position: var(--pwidth) 0;
+  }
 }
 </style>
