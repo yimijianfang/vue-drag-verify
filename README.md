@@ -4,7 +4,22 @@
 
 ##### 使用方法
 
-1. 引入对应组件
+1. 按需引入对应组件
+
+   ```
+   // 基本滑块验证组件
+   import dragVerify from "@/components/core/dragVerify";
+   // 图片滑块组件
+   import dragVerifyImg from "@/components/core/dragVerifyImg";
+   // 旋转图片滑块组件
+   import dragVerifyImgRotate from "@/components/core/dragVerifyImgRotate";
+   
+   components{
+      dragVerify,
+      dragVerifyImg,
+      dragVerifyImgRotate
+   }
+   ```
 
 2. 引入以下代码
 
