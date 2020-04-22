@@ -4,17 +4,13 @@
 
 ##### 使用方法
 
-1. ```
-   import dragVerify from 'dragVerify'
-   export default {
-     name: 'app',
-     components:{
-       dragVerify
-     }
-   }
+1. 引入对应组件
+
+2. 引入以下代码
+
+   ![main](<https://raw.githubusercontent.com/yimijianfang/demo/master/images/1.png>)
+
    ```
-![main](<https://raw.githubusercontent.com/yimijianfang/demo/master/images/1.png>)
-2-1. ```
    <drag-verify
      ref="dragVerify"
      :isPassing.sync="isPassing2"
@@ -25,39 +21,37 @@
      >
    </drag-verify>
    ```
-   
-![main](<https://raw.githubusercontent.com/yimijianfang/demo/master/images/2.png>)
-2-2. ```
-   <drag-verify-img 
-	 ref="sss"
-	 :imgsrc="t3"
-	 :isPassing.sync="isPassing"
-	 :showRefresh="true"
-	 text="请按住滑块拖动"
-	 successText="验证通过"
-	 handlerIcon="el-icon-d-arrow-right"
-	 successIcon="el-icon-circle-check"
-	 @refresh="reimg"
-	 @passcallback="pass"
-	>
-   </drag-verify-img>
-   ```
-   
+
+   ![main](<https://raw.githubusercontent.com/yimijianfang/demo/master/images/2.png>)
+	<drag-verify-img 
+	  ref="sss"
+	  :imgsrc="t3"
+	  :isPassing.sync="isPassing"
+	  :showRefresh="true"
+	  text="请按住滑块拖动"
+	  successText="验证通过"
+	  handlerIcon="el-icon-d-arrow-right"
+	  successIcon="el-icon-circle-check"
+	  @refresh="reimg"
+	  @passcallback="pass"
+	  >
+	</drag-verify-img>
 ![main](<https://raw.githubusercontent.com/yimijianfang/demo/master/images/3.png>)
-2-3. ```
-	<drag-verify-img-rotate 
-	 ref="sss"
-	 :imgsrc="logo"  
-	 :isPassing.sync="isPassing"
-	 :showTips="true"
-	 text="请按住滑块拖动"
-	 successText="验证通过"
-	 handlerIcon="el-icon-d-arrow-right"
-	 successIcon="el-icon-circle-check"
-	 @refresh="reimg"
-	 >
-	</drag-verify-img-rotate>
+
+   ```
+<drag-verify-img-rotate 
+  ref="sss"
+  :imgsrc="logo"  
+  :isPassing.sync="isPassing"
+  :showTips="true"
+  text="请按住滑块拖动"
+  successText="验证通过"
+  handlerIcon="el-icon-d-arrow-right"
+  successIcon="el-icon-circle-check"
+  @refresh="reimg"
+  >
+</drag-verify-img-rotate>
    ```
 
-[DEMO](https://yimijianfang.github.io/vue-drag-verify/#/)
+[演示和文档](https://yimijianfang.github.io/vue-drag-verify/#/)
 
