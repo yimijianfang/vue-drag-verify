@@ -23,19 +23,22 @@
    ```
 
    ![main](<https://raw.githubusercontent.com/yimijianfang/demo/master/images/2.png>)
-	<drag-verify-img 
-	  ref="sss"
-	  :imgsrc="t3"
-	  :isPassing.sync="isPassing"
-	  :showRefresh="true"
-	  text="请按住滑块拖动"
-	  successText="验证通过"
-	  handlerIcon="el-icon-d-arrow-right"
-	  successIcon="el-icon-circle-check"
-	  @refresh="reimg"
-	  @passcallback="pass"
-	  >
-	</drag-verify-img>
+   
+   ```
+   <drag-verify-img 
+     ref="sss"
+     :imgsrc="t3"
+     :isPassing.sync="isPassing"
+     :showRefresh="true"
+     text="请按住滑块拖动"
+     successText="验证通过"
+     handlerIcon="el-icon-d-arrow-right"
+     successIcon="el-icon-circle-check"
+     @refresh="reimg"
+     @passcallback="pass"
+     >
+   </drag-verify-img>
+   ```
 ![main](<https://raw.githubusercontent.com/yimijianfang/demo/master/images/3.png>)
 
    ```
