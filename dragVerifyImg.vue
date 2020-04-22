@@ -5,7 +5,7 @@
     <div class="move-bar" :class="{goFirst:isOk, goKeep:isKeep}" :style="movebarStyle" ref="moveBar" v-show="showBar"></div>
     <div class="clip-bar" :style="clipbarStyle" ref="clipBar"></div>
     <div class="refresh" v-if="showRefresh">
-      <i class="el-icon-refresh-right" @click="refreshimg"></i>
+      <i :class="refreshIcon" @click="refreshimg"></i>
     </div>
     <div class="tips success" v-if="showTips && isPassing">{{successTip}}</div>
     <div class="tips danger" v-if="showTips && !isPassing && showErrorTip">{{failTip}}</div>
@@ -131,6 +131,9 @@ export default {
       type: Boolean,
       default: false
     },
+    refreshIcon:{
+      type: String
+    },
     showTips:{
       type: Boolean,
       default: true
@@ -143,6 +146,10 @@ export default {
       type: String,
       default: "验证通过，拖动滑块将悬浮图像正确合并"
     },
+    diffWidth: {
+      type: Number,
+      default: 20
+    }
   },
   mounted: function() {
     const dragEl = this.$refs.dragVerify;
@@ -166,6 +173,7 @@ export default {
       return this.isPassing ? this.successText : "";
     },
     dragVerifyStyle: function() {
+      console.log(this.width, 'width')
       return {
         width: this.width + "px",
         height: this.height + "px",
@@ -267,7 +275,7 @@ export default {
     dragFinish: function(e) {
       if (this.isMoving && !this.isPassing) {
         var _x = (e.pageX || e.changedTouches[0].pageX) - this.x;
-        if (Math.abs(_x - this.clipBarx)>20) {
+        if (Math.abs(_x - this.clipBarx)>this.diffWidth) {
           this.isOk = true;
           var that = this;
           setTimeout(function() {
@@ -403,22 +411,6 @@ export default {
   width: 0px !important;
   transition: width 0.5s;
 }
-@-webkit-keyframes slidetounlock {
-  0% {
-    background-position: var(--pwidth) 0;
-  }
-  100% {
-    background-position: var(--width) 0;
-  }
-}
-@-webkit-keyframes slidetounlock2 {
-  0% {
-    background-position: var(--pwidth) 0;
-  }
-  100% {
-    background-position: var(--pwidth) 0;
-  }
-}
 .drag-verify-container{
   position: relative;
   line-height: 0;
@@ -456,5 +448,23 @@ export default {
 .tips.danger{
   background: rgba(0,0,0,0.6);
     color: yellow;
+}
+</style>
+<style>
+@-webkit-keyframes slidetounlock {
+  0% {
+    background-position: var(--pwidth) 0;
+  }
+  100% {
+    background-position: var(--width) 0;
+  }
+}
+@-webkit-keyframes slidetounlock2 {
+  0% {
+    background-position: var(--pwidth) 0;
+  }
+  100% {
+    background-position: var(--pwidth) 0;
+  }
 }
 </style>
