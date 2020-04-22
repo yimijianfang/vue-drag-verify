@@ -39,21 +39,22 @@
      >
    </drag-verify-img>
    ```
-![main](<https://raw.githubusercontent.com/yimijianfang/demo/master/images/3.png>)
+   
+   ![main](<https://raw.githubusercontent.com/yimijianfang/demo/master/images/3.png>)
 
    ```
-<drag-verify-img-rotate 
-  ref="sss"
-  :imgsrc="logo"  
-  :isPassing.sync="isPassing"
-  :showTips="true"
-  text="请按住滑块拖动"
-  successText="验证通过"
-  handlerIcon="el-icon-d-arrow-right"
-  successIcon="el-icon-circle-check"
-  @refresh="reimg"
-  >
-</drag-verify-img-rotate>
+   <drag-verify-img-rotate 
+     ref="sss"
+     :imgsrc="logo"  
+     :isPassing.sync="isPassing"
+     :showTips="true"
+     text="请按住滑块拖动"
+     successText="验证通过"
+     handlerIcon="el-icon-d-arrow-right"
+     successIcon="el-icon-circle-check"
+     @refresh="reimg"
+     >
+   </drag-verify-img-rotate>
    ```
 
 [演示和文档](https://yimijianfang.github.io/vue-drag-verify/#/)
