@@ -4,7 +4,7 @@
     <img ref="checkImg" :src="imgsrc" @load="checkimgLoaded" style="width:100%"  alt="">
     <div class="move-bar" :class="{goFirst:isOk, goKeep:isKeep}" :style="movebarStyle" ref="moveBar" v-show="showBar"></div>
     <div class="clip-bar" :style="clipbarStyle" ref="clipBar"></div>
-    <div class="refresh" v-if="showRefresh">
+    <div class="refresh" v-if="showRefresh && !this.isPassing">
       <i :class="refreshIcon" @click="refreshimg"></i>
     </div>
     <div class="tips success" v-if="showTips && isPassing">{{successTip}}</div>
