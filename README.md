@@ -23,7 +23,7 @@
 
 2. 引入以下代码
 
-   ![main](<https://raw.githubusercontent.com/yimijianfang/demo/master/images/1.png>)
+   ![main](<https://raw.githubusercontent.com/yimijianfang/vue-drag-verify/master/images/1.png>)
 
    ```
    <drag-verify
@@ -37,7 +37,7 @@
    </drag-verify>
    ```
 
-   ![main](<https://raw.githubusercontent.com/yimijianfang/demo/master/images/2.png>)
+   ![main](<https://raw.githubusercontent.com/yimijianfang/vue-drag-verify/master/images/2.png>)
    
    ```
    <drag-verify-img 
@@ -55,7 +55,7 @@
    </drag-verify-img>
    ```
    
-   ![main](<https://raw.githubusercontent.com/yimijianfang/demo/master/images/3.png>)
+   ![main](<https://raw.githubusercontent.com/yimijianfang/vue-drag-verify/master/images/3.png>)
 
    ```
    <drag-verify-img-rotate 
