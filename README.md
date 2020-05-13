@@ -54,8 +54,28 @@
      >
    </drag-verify-img>
    ```
+
    
    ![main](<https://raw.githubusercontent.com/yimijianfang/vue-drag-verify/master/images/3.png>)
+   
+   > 如图片与项目非同源，需要图片服务设置header("Access-Control-Allow-Origin: *");
+   ```
+   <drag-verify-img-chip 
+     ref="sss"
+     :imgsrc="t3"
+     :isPassing.sync="isPassing"
+     :showRefresh="true"
+     text="请按住滑块拖动"
+     successText="验证通过"
+     handlerIcon="el-icon-d-arrow-right"
+     successIcon="el-icon-circle-check"
+     @refresh="reimg"
+     @passcallback="pass"
+     >
+   </drag-verify-img-chip>
+   ```
+   
+   ![main](<https://raw.githubusercontent.com/yimijianfang/vue-drag-verify/master/images/4.png>)
 
    ```
    <drag-verify-img-rotate 
