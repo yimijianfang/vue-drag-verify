@@ -140,7 +140,7 @@ export default {
     },
     failTip: {
       type: String,
-      default: "验证通过，拖动滑块将悬浮图像正确合并"
+      default: "验证未通过，拖动滑块将悬浮图像正确合并"
     },
     diffWidth: {
       type: Number,
