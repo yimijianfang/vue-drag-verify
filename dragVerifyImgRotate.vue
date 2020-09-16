@@ -1,48 +1,62 @@
 <template>
-<div class="drag-verify-container">
-  <div :style="dragVerifyImgStyle">
-    <img ref="checkImg" :src="imgsrc" class="check-img" :class="{goOrigin:isOk}" @load="checkimgLoaded" :style="imgStyle"  alt="">
-    <div class="tips success" v-if="showTips && isPassing">{{successTip}}</div>
-    <div class="tips danger" v-if="showTips && !isPassing && showErrorTip">{{failTip}}</div>
-  </div>
-    <div
-    ref="dragVerify"
-    class="drag_verify"
-    :style="dragVerifyStyle"
-    @mousemove="dragMoving"
-    @mouseup="dragFinish"
-    @mouseleave="dragFinish"
-    @touchmove="dragMoving"
-    @touchend="dragFinish"
-  >
-    <div
-      class="dv_progress_bar"
-      :class="{goFirst2:isOk}"
-      ref="progressBar"
-      :style="progressBarStyle"
-    >
-      {{successMessage}}
+  <div class="drag-verify-container">
+    <div :style="dragVerifyImgStyle">
+      <img
+        ref="checkImg"
+        :src="imgsrc"
+        class="check-img"
+        :class="{goOrigin:isOk}"
+        @load="checkimgLoaded"
+        :style="imgStyle"
+        alt=""
+      >
+      <div
+        class="tips success"
+        v-if="showTips && isPassing"
+      >{{successTip}}</div>
+      <div
+        class="tips danger"
+        v-if="showTips && !isPassing && showErrorTip"
+      >{{failTip}}</div>
     </div>
     <div
-      class="dv_text"
-      :style="textStyle"
-      ref="message"
+      ref="dragVerify"
+      class="drag_verify"
+      :style="dragVerifyStyle"
+      @mousemove="dragMoving"
+      @mouseup="dragFinish"
+      @mouseleave="dragFinish"
+      @touchmove="dragMoving"
+      @touchend="dragFinish"
     >
-      {{message}}
-    </div>
+      <div
+        class="dv_progress_bar"
+        :class="{goFirst2:isOk}"
+        ref="progressBar"
+        :style="progressBarStyle"
+      >
+        {{successMessage}}
+      </div>
+      <div
+        class="dv_text"
+        :style="textStyle"
+        ref="message"
+      >
+        {{message}}
+      </div>
 
-    <div
-      class="dv_handler dv_handler_bg"
-      :class="{goFirst:isOk}"
-      @mousedown="dragStart"
-      @touchstart="dragStart"
-      ref="handler"
-      :style="handlerStyle"
-    >
-      <i :class="handlerIcon"></i>
+      <div
+        class="dv_handler dv_handler_bg"
+        :class="{goFirst:isOk}"
+        @mousedown="dragStart"
+        @touchstart="dragStart"
+        ref="handler"
+        :style="handlerStyle"
+      >
+        <i :class="handlerIcon"></i>
+      </div>
     </div>
   </div>
-</div>
 </template>
 <script>
 export default {
@@ -106,10 +120,10 @@ export default {
       type: String,
       default: "#333"
     },
-    imgsrc:{
+    imgsrc: {
       type: String
     },
-    showTips:{
+    showTips: {
       type: Boolean,
       default: true
     },
@@ -125,11 +139,11 @@ export default {
       type: Number,
       default: 10
     },
-    minDegree:{
+    minDegree: {
       type: Number,
       default: 90
     },
-    maxDegree:{
+    maxDegree: {
       type: Number,
       default: 270
     }
@@ -152,7 +166,7 @@ export default {
     message: function() {
       return this.isPassing ? "" : this.text;
     },
-    successMessage: function(){
+    successMessage: function() {
       return this.isPassing ? this.successText : "";
     },
     dragVerifyStyle: function() {
@@ -168,8 +182,8 @@ export default {
       return {
         width: this.width + "px",
         height: this.width + "px",
-        position: 'relative',
-        overflow: 'hidden',
+        position: "relative",
+        overflow: "hidden",
         "border-radius": "50%"
       };
     },
@@ -189,10 +203,10 @@ export default {
         fontSize: this.textSize
       };
     },
-    factor: function(){
+    factor: function() {
       //避免指定旋转角度时一直拖动到最右侧才验证通过
-      if(this.minDegree==this.maxDegree){
-        return Math.floor(1+Math.random()*6)/10+1
+      if (this.minDegree == this.maxDegree) {
+        return Math.floor(1 + Math.random() * 6) / 10 + 1;
       }
       return 1;
     }
@@ -202,24 +216,26 @@ export default {
       isMoving: false,
       x: 0,
       isOk: false,
-      showBar:false,
-      showErrorTip:false,
+      showBar: false,
+      showErrorTip: false,
       ranRotate: 0,
-      cRotate:0,
-      imgStyle:{}
+      cRotate: 0,
+      imgStyle: {}
     };
   },
   methods: {
-    checkimgLoaded: function(){
+    checkimgLoaded: function() {
       //生成旋转角度
       var minDegree = this.minDegree;
       var maxDegree = this.maxDegree;
-      var ranRotate = Math.floor(minDegree + Math.random()*(maxDegree-minDegree)); //生成随机角度
+      var ranRotate = Math.floor(
+        minDegree + Math.random() * (maxDegree - minDegree)
+      ); //生成随机角度
       this.ranRotate = ranRotate;
-      console.log('旋转'+ranRotate)
+      console.log("旋转" + ranRotate);
       this.imgStyle = {
         transform: `rotateZ(${ranRotate}deg)`
-      }
+      };
     },
     dragStart: function(e) {
       if (!this.isPassing) {
@@ -236,26 +252,28 @@ export default {
     dragMoving: function(e) {
       if (this.isMoving && !this.isPassing) {
         var _x = (e.pageX || e.touches[0].pageX) - this.x;
-        console.log(_x,'_x')
+        console.log(_x, "_x");
         var handler = this.$refs.handler;
         handler.style.left = _x + "px";
         this.$refs.progressBar.style.width = _x + this.height / 2 + "px";
-        var cRotate = Math.ceil(_x/(this.width - this.height)*this.maxDegree*this.factor)
-        console.log(cRotate,'cRotate')
+        var cRotate = Math.ceil(
+          (_x / (this.width - this.height)) * this.maxDegree * this.factor
+        );
+        console.log(cRotate, "cRotate");
         this.cRotate = cRotate;
-        var rotate = this.ranRotate - cRotate
+        var rotate = this.ranRotate - cRotate;
         this.imgStyle = {
           transform: `rotateZ(${rotate}deg)`
-        }
+        };
       }
     },
     dragFinish: function(e) {
       if (this.isMoving && !this.isPassing) {
-        if (Math.abs(this.ranRotate - this.cRotate)>this.diffDegree) {
+        if (Math.abs(this.ranRotate - this.cRotate) > this.diffDegree) {
           this.isOk = true;
           this.imgStyle = {
             transform: `rotateZ(${this.ranRotate}deg)`
-          }
+          };
           var that = this;
           setTimeout(function() {
             that.$refs.handler.style.left = "0";
@@ -263,6 +281,7 @@ export default {
             that.isOk = false;
           }, 500);
           this.showErrorTip = true;
+          this.$emit("passfail");
         } else {
           this.passVerify();
         }
@@ -285,7 +304,7 @@ export default {
       this.reImg();
       this.checkimgLoaded();
     },
-    reImg: function(){
+    reImg: function() {
       this.$emit("update:isPassing", false);
       const oriData = this.$options.data();
       for (const key in oriData) {
@@ -302,14 +321,14 @@ export default {
       message.style.animation = "slidetounlock 3s infinite";
       message.style.color = this.background;
     },
-    refreshimg:function(){
-      this.$emit('refresh')
+    refreshimg: function() {
+      this.$emit("refresh");
     }
   },
-  watch:{
-    imgsrc:{
+  watch: {
+    imgsrc: {
       immediate: false,
-      handler: function(){
+      handler: function() {
         this.reImg();
       }
     }
@@ -377,27 +396,27 @@ export default {
 .goOrigin {
   transition: transform 0.5s;
 }
-.goKeep{
+.goKeep {
   transition: left 0.2s;
 }
 .goFirst2 {
   width: 0px !important;
   transition: width 0.5s;
 }
-.drag-verify-container{
+.drag-verify-container {
   position: relative;
   line-height: 0;
   border-radius: 50%;
 }
-.move-bar{
+.move-bar {
   position: absolute;
   z-index: 100;
 }
-.clip-bar{
+.clip-bar {
   position: absolute;
-  background: rgba(255,255,255,0.8);
+  background: rgba(255, 255, 255, 0.8);
 }
-.refresh{
+.refresh {
   position: absolute;
   right: 5px;
   top: 5px;
@@ -405,7 +424,7 @@ export default {
   font-size: 20px;
   z-index: 200;
 }
-.tips{
+.tips {
   position: absolute;
   bottom: 25px;
   height: 20px;
@@ -415,15 +434,15 @@ export default {
   font-size: 12px;
   z-index: 200;
 }
-.tips.success{
-  background: rgba(255,255,255,0.6);
+.tips.success {
+  background: rgba(255, 255, 255, 0.6);
   color: green;
 }
-.tips.danger{
-  background: rgba(0,0,0,0.6);
-    color: yellow;
+.tips.danger {
+  background: rgba(0, 0, 0, 0.6);
+  color: yellow;
 }
-.check-img{
+.check-img {
   width: 100%;
   border-radius: 50%;
 }

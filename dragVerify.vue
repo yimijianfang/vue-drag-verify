@@ -199,6 +199,7 @@ export default {
             that.$refs.progressBar.style.width = "0";
             that.isOk = false;
           }, 500);
+          this.$emit("passfail");
         } else {
           var handler = this.$refs.handler;
           handler.style.left = this.width - this.height + "px";
