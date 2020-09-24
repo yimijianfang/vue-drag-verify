@@ -308,7 +308,7 @@ export default {
       this.$emit("update:isPassing", false);
       const oriData = this.$options.data();
       for (const key in oriData) {
-        if (oriData.hasOwnProperty(key)) {
+        if (Object.prototype.hasOwnProperty.call(oriData, key)) {
           this.$set(this, key, oriData[key]);
         }
       }
