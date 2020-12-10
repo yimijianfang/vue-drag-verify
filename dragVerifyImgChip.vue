@@ -266,7 +266,7 @@ export default {
       var halfWidth = Math.floor(this.width / 2);
       var refreshHeigth = 25;
       var tipHeight = 20;
-      var x = halfWidth + Math.ceil(Math.random() * (halfWidth - barWidth));
+      var x = halfWidth + Math.ceil(Math.random() * (halfWidth - barWidth - this.barRadius - 5));
       var y =
         refreshHeigth +
         Math.floor(
@@ -281,6 +281,7 @@ export default {
 
       var moveCanvas = this.$refs.movecanvas;
       moveCanvas.setAttribute("width", imgWidth);
+      moveCanvas.setAttribute("height", imgHeight);
       this.$refs.movecanvas.style.display = "block";
       const L = barWidth + this.barRadius * 2 + 3; //实际宽度
       var moveCtx = this.$refs.movecanvas.getContext("2d");
