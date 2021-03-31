@@ -20,7 +20,7 @@
       ></canvas>
       <div
         class="refresh"
-        v-if="showRefresh && !this.isPassing"
+        v-if="showRefresh && !isPassing"
       >
         <i
           :class="refreshIcon"
