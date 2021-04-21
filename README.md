@@ -2,11 +2,12 @@
 
 > 需对父元素或html设置user-select: none
 
+[demo](https://yimijianfang.github.io/vue-drag-verify/#/)
 ##### 使用方法
 
 1. 引入升级包
 
-   a. 使用npm（推荐）
+   a. 使用npm（暂不支持vue3）
 
    ```
    // 基本滑块验证组件
@@ -19,7 +20,7 @@
    npm i vue-drag-verify-img-rotate -S
    ```
 
-   b. 按需引入对应组件（适合二次开发）
+   b. 按需引入对应组件（支持vue3，适合二次开发）
 
    ```
    // 基本滑块验证组件
@@ -109,5 +110,11 @@
   >
 </drag-verify-img-rotate>
 ```
-[演示和文档](https://yimijianfang.github.io/vue-drag-verify/#/)
 
+#### vue3使用
+1. [.sync](https://vue3js.cn/docs/zh/guide/migration/v-model.html#v-model)
+  ~~`:isPassing.sync="isPassing2"`~~
+  `v-model:isPassing="isPassing2"`
+2. [v-slot](https://vue3js.cn/docs/zh/api/directives.html#v-slot)
+  ~~`<i slot="textBefore"></i>`~~
+  `<template #slot><i></i></template>`

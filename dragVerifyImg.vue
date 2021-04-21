@@ -22,7 +22,7 @@
       ></div>
       <div
         class="refresh"
-        v-if="showRefresh && !this.isPassing"
+        v-if="showRefresh && !isPassing"
       >
         <i
           :class="refreshIcon"
@@ -188,7 +188,6 @@ export default {
   computed: {
     handlerStyle: function() {
       return {
-        left: "0px",
         width: this.height + "px",
         height: this.height + "px",
         background: this.handlerBg
@@ -279,17 +278,14 @@ export default {
         width: barWidth + "px",
         height: barHeight + "px",
         top: y + "px",
-        left: "0px",
         "border-radius": this.barRadius + "px"
       };
     },
     dragStart: function(e) {
       if (!this.isPassing) {
         this.isMoving = true;
-        var handler = this.$refs.handler;
         this.x =
-          (e.pageX || e.touches[0].pageX) -
-          parseInt(handler.style.left.replace("px", ""), 10);
+          (e.pageX || e.touches[0].pageX)
       }
       this.showBar = true;
       this.showErrorTip = false;
@@ -352,7 +348,7 @@ export default {
       const oriData = this.$options.data();
       for (const key in oriData) {
         if (Object.prototype.hasOwnProperty.call(oriData, key)) {
-          this.$set(this, key, oriData[key]);
+          this[key] = oriData[key]
         }
       }
       var handler = this.$refs.handler;
@@ -363,7 +359,6 @@ export default {
       message.style["-webkit-text-fill-color"] = "transparent";
       message.style.animation = "slidetounlock 3s infinite";
       message.style.color = this.background;
-      this.$refs.moveBar.style.left = "0px";
     },
     refreshimg: function() {
       this.$emit("refresh");

@@ -120,7 +120,6 @@ export default {
   computed: {
     handlerStyle: function() {
       return {
-        left: "0px",
         width: this.height + "px",
         height: this.height + "px",
         background: this.handlerBg
@@ -166,10 +165,7 @@ export default {
     dragStart: function(e) {
       if (!this.isPassing) {
         this.isMoving = true;
-        var handler = this.$refs.handler;
-        this.x =
-          (e.pageX || e.touches[0].pageX) -
-          parseInt(handler.style.left.replace("px", ""), 10);
+        this.x = (e.pageX || e.touches[0].pageX)
       }
       this.$emit("handlerMove");
     },
@@ -225,7 +221,7 @@ export default {
       const oriData = this.$options.data();
       for (const key in oriData) {
         if (Object.prototype.hasOwnProperty.call(oriData, key)) {
-          this.$set(this, key, oriData[key]);
+          this[key] = oriData[key]
         }
       }
       var handler = this.$refs.handler;
